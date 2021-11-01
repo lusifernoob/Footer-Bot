@@ -17,7 +17,6 @@ from helpers.settings import ShowSettings
 from helpers.broadcast import broadcast_handler
 from helpers.fetch_me import FetchMeOnChat
 from helpers.add_footer import AddFooter
-from helpers.forcesub import ForceSub
 
 AHBot = Client(
     session_name=Config.SESSION_NAME,
@@ -30,13 +29,13 @@ AHBot = Client(
 @AHBot.on_message(filters.private & filters.command("start"))
 async def _start(bot: Client, m: Message):
     await AddUserToDatabase(bot, m)
-        try:
+    try:
         await m.reply_text(
             Config.START_TEXT,
             reply_markup=InlineKeyboardMarkup(
                 [
-                    [InlineKeyboardButton("Support Group", url="https://t.me/OMG_info"), InlineKeyboardButton("follow Twitter", url="https://mobile.twitter.com/Lusifer_noob")],
-                    [InlineKeyboardButton("Developer - noob", url="https://t.me/shado_hackers")]
+                    [InlineKeyboardButton("Support", url="https://t.me/OMG_info"), InlineKeyboardButton("Follow", url="https://mobile.twitter.com/Lusifer_noob")],
+                    [InlineKeyboardButton("Developer - @shado_hackers", url="https://t.me/shado_hackers")]
                 ]
             ),
             quote=True
@@ -49,7 +48,6 @@ async def _start(bot: Client, m: Message):
 @AHBot.on_message(filters.private & filters.command("settings"))
 async def _settings(bot: Client, event: Message):
     await AddUserToDatabase(bot, event)
-        try:
     editable = await event.reply_text("Please Wait ...", quote=True)
     await ShowSettings(editable, user_id=event.from_user.id)
 
