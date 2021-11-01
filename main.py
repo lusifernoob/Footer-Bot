@@ -30,9 +30,7 @@ AHBot = Client(
 @AHBot.on_message(filters.private & filters.command("start"))
 async def _start(bot: Client, m: Message):
     await AddUserToDatabase(bot, m)
-    FSub = await ForceSub(bot, event)
-    if FSub == 400:
-        return
+        try:
         await m.reply_text(
             Config.START_TEXT,
             reply_markup=InlineKeyboardMarkup(
@@ -51,9 +49,7 @@ async def _start(bot: Client, m: Message):
 @AHBot.on_message(filters.private & filters.command("settings"))
 async def _settings(bot: Client, event: Message):
     await AddUserToDatabase(bot, event)
-     FSub = await ForceSub(bot, event)
-    if FSub == 400:
-        return
+        try:
     editable = await event.reply_text("Please Wait ...", quote=True)
     await ShowSettings(editable, user_id=event.from_user.id)
 
