@@ -32,7 +32,7 @@ async def _start(bot: Client, m: Message):
     await AddUserToDatabase(bot, m)
     FSub = await ForceSub(bot, event)
     if FSub == 400:
-    try:
+        return
         await m.reply_text(
             Config.START_TEXT,
             reply_markup=InlineKeyboardMarkup(
@@ -53,7 +53,7 @@ async def _settings(bot: Client, event: Message):
     await AddUserToDatabase(bot, event)
      FSub = await ForceSub(bot, event)
     if FSub == 400:
-      try:
+        return
     editable = await event.reply_text("Please Wait ...", quote=True)
     await ShowSettings(editable, user_id=event.from_user.id)
 
